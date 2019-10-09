@@ -108,7 +108,8 @@ public:
 	std::string DecodeKey(std::string key);
 	std::string m_strLastLongText;
 	LogWriter *log;
-	
+	CString m_msgShowStr;
+
 	/******** yangshaoguang 2018/02/13 START ¡ý ********/
 	//×÷ÓÃ
 public:

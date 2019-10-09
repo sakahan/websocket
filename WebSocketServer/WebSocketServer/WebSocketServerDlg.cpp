@@ -179,6 +179,7 @@ CWebSocketServerDlg::CWebSocketServerDlg(CWnd* pParent /*=NULL*/)
 	int timecount = GetTickCount();
 	sprintf(name,"./log/WebSocket%d.log",timecount);
 	log = new LogWriter(name);
+	m_msgShowStr="";
 }
 
 void CWebSocketServerDlg::DoDataExchange(CDataExchange* pDX)
@@ -405,6 +406,7 @@ void CWebSocketServerDlg::OnBnClickedButton2() //发送消息
 }
 
 
+#define  DATA_BUF_SIZE 1024
 
 LRESULT CWebSocketServerDlg::OnMySocket(WPARAM wParam, LPARAM lParam)
 {
@@ -412,10 +414,12 @@ LRESULT CWebSocketServerDlg::OnMySocket(WPARAM wParam, LPARAM lParam)
 	int Len = sizeof(addr_client);
 	CString strTip;
 	DWORD reclen;
-	char msgRcv[512] = { 0 };
-	char msgShow[506] = { 0 };
+	char msgRcv[DATA_BUF_SIZE] = { 0 };
+	char msgShow[DATA_BUF_SIZE] = { 0 };
 	int i = sizeof(msgRcv);
 	int j = sizeof(msgShow);
+	static int count = 0;
+
 	if (WSAGETSELECTERROR(lParam))
 	{
 		closesocket(s);
@@ -445,8 +449,8 @@ LRESULT CWebSocketServerDlg::OnMySocket(WPARAM wParam, LPARAM lParam)
 		*/
 
 
-		reclen = recv(client, msgRcv, 512, 0);
-		if (reclen > 7 && reclen <600)
+		reclen = recv(client, msgRcv, DATA_BUF_SIZE, 0);
+		if (reclen > 7 && reclen <DATA_BUF_SIZE)
 		{
 			std::string buffer(msgRcv);
 			char *p = GetKey((char*)buffer.c_str());
@@ -457,16 +461,14 @@ LRESULT CWebSocketServerDlg::OnMySocket(WPARAM wParam, LPARAM lParam)
 				{
 					msgShow[i] = msgRcv[i % 4 + 2] ^ msgRcv[i + 6];
 				}
-				CString ss1;
-				m_strMsgFromWeb = msgShow;
 
-				m_strMsgFromWeb = U2G(msgShow);  //yangshg 2018/06/15 10:29:26 UTF8--->GB2312
-				{//GetJson
-					int pos = m_strMsgFromWeb.find_first_of('}');
-					m_strMsgFromWeb = m_strMsgFromWeb.substr(0,pos + 1);
-				}
+				CString temp;
+				temp.Format("%d,%s\r\n",++count,msgShow);
+				m_msgShowStr.Append(temp);
+
 				log->write("收到的内容msgShow:%s",m_strMsgFromWeb.c_str());
-				m_RecvEdit.SetWindowText(CString(m_strMsgFromWeb.c_str()));
+				m_RecvEdit.SetWindowText(m_msgShowStr);
+				m_strMsgFromWeb = U2G(msgShow);  //yangshg 2018/06/15 10:29:26 UTF8--->GB2312
 				if (m_strMsgFromWeb != "")
 				{
 					log->write("调用ProcessRecvMsg去处理非空串:m_strMsgFromWeb--%s",m_strMsgFromWeb.c_str());
