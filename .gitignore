@@ -4,3 +4,5 @@ Debug
 WebSocketServer/WebSocketServer/WebSocketServer.vcxproj.filters
 WebSocketServer/WebSocketServer/WebSocketServer.vcxproj.user
 *.log
+/WebSocketServer/ipch/websocketserver-c0857232/*.ipch
+/WebSocketServer/WebSocketServer/*.aps
