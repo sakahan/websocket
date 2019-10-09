@@ -249,8 +249,8 @@ BOOL CWebSocketServerDlg::OnInitDialog()
 	m_filePath += _T("KFCallout");
 	m_filePath = _T("C:\\KFCallout");
 	DeleteFile(m_filePath);
-	SetWindowText("__53__WebSocketServer__53__");
- 	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
+	//SetWindowText("__53__WebSocketServer__53__");
+ 	//ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
  	//SetWindowPos(NULL, 0, 0, 0, 0, NULL);
  	//ShowWindow(SW_SHOW); 
 	m_IPCtl.SetWindowText(_T("127.0.0.1"));
@@ -509,11 +509,6 @@ LRESULT CWebSocketServerDlg::OnMySocket(WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }
-// #if 0
-// 	int i = 0;
-// #else if 1
-// 	int i = 0;
-// #endif
 
 char* CWebSocketServerDlg::GetKey(char* handShakeHeader)
 {
