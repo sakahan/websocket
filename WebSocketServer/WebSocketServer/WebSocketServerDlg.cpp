@@ -250,8 +250,8 @@ BOOL CWebSocketServerDlg::OnInitDialog()
 	DeleteFile(m_filePath);
 	SetWindowText("__53__WebSocketServer__53__");
  	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
- 	SetWindowPos(NULL, 0, 0, 0, 0, NULL);
- 	ShowWindow(SW_HIDE); 
+ 	//SetWindowPos(NULL, 0, 0, 0, 0, NULL);
+ 	//ShowWindow(SW_SHOW); 
 	m_IPCtl.SetWindowText(_T("127.0.0.1"));
 	m_PortEdit.SetWindowText(_T("8356"));
 	OnBnClickedButton1();

@@ -1,0 +1,6 @@
+Debug
+*.sdf
+*.opensdf
+WebSocketServer/WebSocketServer/WebSocketServer.vcxproj.filters
+WebSocketServer/WebSocketServer/WebSocketServer.vcxproj.user
+*.log
