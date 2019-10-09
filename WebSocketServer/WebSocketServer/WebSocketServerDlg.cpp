@@ -308,7 +308,7 @@ HCURSOR CWebSocketServerDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
+//TODO 地址与界面不一致
 const char* _host = "127.0.0.1";
 void CWebSocketServerDlg::OnBnClickedButton1() //连接网络
 {
@@ -429,7 +429,7 @@ LRESULT CWebSocketServerDlg::OnMySocket(WPARAM wParam, LPARAM lParam)
 	{
 	case FD_ACCEPT:
 		client = accept(s, (sockaddr*)&addr_client, &Len);
-		SetWindowText("__53__WebSocketServer__53__");
+		//SetWindowText("__53__WebSocketServer__53__");
 		if (m_TimerFlag == FALSE)
 		{
 			m_TimerFlag = TRUE;

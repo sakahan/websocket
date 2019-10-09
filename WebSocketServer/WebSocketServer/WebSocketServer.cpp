@@ -65,12 +65,15 @@ BOOL CWebSocketServerApp::InitInstance()
 	// TODO: 应适当修改该字符串，
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
+#if 0
 	HWND  hWnd = ::FindWindow(NULL,_T("__53__WebSocketServer__53__"));
 	HWND  hWnd1 = ::FindWindow(NULL,_T("1__53__WebSocketServer__53__1"));
 	if (hWnd || hWnd1)
 	{
 		return FALSE;
 	}
+#endif
+
 	CWebSocketServerDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
